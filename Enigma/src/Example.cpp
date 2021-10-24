@@ -3,12 +3,12 @@
 
 #include "Enigma/Enigma.h"
 
-int main() {
+int main(int argc, char* argv[]) {
 	// Enigma initialize with default settings (plugboard, 3 rotors, reflector)
 	Encryption::Enigma enigma;
 
 	try {
-		enigma.Init("TestFiles/Rotors", "TestFiles/Reflectors");
+		enigma.Init("Rotors/", "Reflectors/");
 	}
 	catch (const char* error) {
 		std::cout << error << std::endl;
@@ -17,40 +17,58 @@ int main() {
 
 	// ========================================================================================= //
 
-	// Set plugboard
-	enigma.AddPlugboardConnection("AM");
-	enigma.AddPlugboardConnection("JD");
-	enigma.AddPlugboardConnection("EZ");
-	enigma.AddPlugboardConnection("PL");
-	enigma.AddPlugboardConnection("GR");
-	enigma.AddPlugboardConnection("OK");
+	if (argc == 1) {
+		std::cout << "Loading default settings...\n";
 
-	// Set number of rotors
-	enigma.SetRotorCount(5);
+		// Set plugboard
+		enigma.AddPlugboardConnection("AM");
+		enigma.AddPlugboardConnection("JD");
+		enigma.AddPlugboardConnection("EZ");
+		enigma.AddPlugboardConnection("PL");
+		enigma.AddPlugboardConnection("GR");
+		enigma.AddPlugboardConnection("OK");
 
-	// Set rotor names
-	enigma.SetRotorName(0, "I");
-	enigma.SetRotorName(1, "II");
-	enigma.SetRotorName(2, "III");
-	enigma.SetRotorName(3, "II");
-	enigma.SetRotorName(4, "I");
+		// Set number of rotors
+		enigma.SetRotorCount(5);
 
-	// Set rotor keys
-	enigma.SetRotorKey(0, 'C');
-	enigma.SetRotorKey(1, 'L');
-	enigma.SetRotorKey(2, 'O');
-	enigma.SetRotorKey(3, 'C');
-	enigma.SetRotorKey(4, 'K');
+		// Set rotor names
+		enigma.SetRotorName(0, "I");
+		enigma.SetRotorName(1, "II");
+		enigma.SetRotorName(2, "III");
+		enigma.SetRotorName(3, "II");
+		enigma.SetRotorName(4, "I");
 
-	// Set rotor rings
-	enigma.SetRotorRing(0, 7);
-	enigma.SetRotorRing(1, 11);
-	enigma.SetRotorRing(2, 25);
-	enigma.SetRotorRing(3, 18);
-	enigma.SetRotorRing(4, 2);
+		// Set rotor keys
+		enigma.SetRotorKey(0, 'C');
+		enigma.SetRotorKey(1, 'L');
+		enigma.SetRotorKey(2, 'O');
+		enigma.SetRotorKey(3, 'C');
+		enigma.SetRotorKey(4, 'K');
 
-	// Set reflector
-	enigma.SetReflector("B");
+		// Set rotor rings
+		enigma.SetRotorRing(0, 7);
+		enigma.SetRotorRing(1, 11);
+		enigma.SetRotorRing(2, 25);
+		enigma.SetRotorRing(3, 18);
+		enigma.SetRotorRing(4, 2);
+
+		// Set reflector
+		enigma.SetReflector("B");
+	}
+	else {
+		std::cout << "Loading settings from file...\n";
+
+		// Load settings from file
+		std::string password = "Password!";
+		enigma.LoadSettings(argv[1], password);
+
+		// Set rotor keys
+		enigma.SetRotorKey(0, 'C');
+		enigma.SetRotorKey(1, 'L');
+		enigma.SetRotorKey(2, 'O');
+		enigma.SetRotorKey(3, 'C');
+		enigma.SetRotorKey(4, 'K');
+	}
 
 	// Encrypt message
 	std::string message = "TEST MESSAGE";
@@ -69,7 +87,7 @@ int main() {
 
 	// Save current settings
 	std::string password = "Password!";
-	enigma.SaveSettings("TestFiles/Settings/TEST.stg", password);
+	enigma.SaveSettings("Settings/TEST.stg", password);
 
 	return 0;
 }
