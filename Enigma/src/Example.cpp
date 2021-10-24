@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <iostream>
 #include <string>
 
@@ -6,6 +7,9 @@
 int main() {
 	// Enigma initialize with default settings (plugboard, 3 rotors, reflector)
 	Encryption::Enigma enigma;
+
+	auto path = std::filesystem::current_path().string();
+	std::filesystem::current_path(path + "/..");
 
 	try {
 		enigma.Init("TestFiles/Rotors", "TestFiles/Reflectors");
