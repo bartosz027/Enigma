@@ -1,0 +1,3 @@
+[submodule "libs/AES"]
+	path = libs/AES
+	url = https://github.com/bartosz027/Advanced-Encryption-Standard
