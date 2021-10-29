@@ -1,9 +1,9 @@
 #pragma once
 #define MAX_ROTOR_COUNT 16
 
-#include "Plugboard.h"
-#include "Rotor.h"
-#include "Reflector.h"
+#include "Enigma/Plugboard.h"
+#include "Enigma/Rotor.h"
+#include "Enigma/Reflector.h"
 
 #include <vector>
 #include <memory>

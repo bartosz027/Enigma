@@ -95,17 +95,17 @@
   <ItemGroup>
     <ClCompile Include="include\Enigma\Enigma.cpp" />
     <ClCompile Include="include\Example.cpp" />
-    <ClCompile Include="src\Plugboard.cpp" />
-    <ClCompile Include="src\Reflector.cpp" />
-    <ClCompile Include="src\Rotor.cpp" />
-    <ClCompile Include="src\Wires.cpp" />
+    <ClCompile Include="src\Enigma\Plugboard.cpp" />
+    <ClCompile Include="src\Enigma\Reflector.cpp" />
+    <ClCompile Include="src\Enigma\Rotor.cpp" />
+    <ClCompile Include="src\Enigma\Wires.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Enigma\Enigma.h" />
-    <ClInclude Include="src\Plugboard.h" />
-    <ClInclude Include="src\Reflector.h" />
-    <ClInclude Include="src\Rotor.h" />
-    <ClInclude Include="src\Wires.h" />
+    <ClInclude Include="src\Enigma\Plugboard.h" />
+    <ClInclude Include="src\Enigma\Reflector.h" />
+    <ClInclude Include="src\Enigma\Rotor.h" />
+    <ClInclude Include="src\Enigma\Wires.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="libs\AES\AES.vcxproj">

@@ -18,16 +18,16 @@
     <ClCompile Include="include\Enigma\Enigma.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Plugboard.cpp">
+    <ClCompile Include="src\Enigma\Plugboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Reflector.cpp">
+    <ClCompile Include="src\Enigma\Reflector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rotor.cpp">
+    <ClCompile Include="src\Enigma\Rotor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Wires.cpp">
+    <ClCompile Include="src\Enigma\Wires.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="include\Example.cpp">
@@ -38,16 +38,16 @@
     <ClInclude Include="include\Enigma\Enigma.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Plugboard.h">
+    <ClInclude Include="src\Enigma\Plugboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Reflector.h">
+    <ClInclude Include="src\Enigma\Reflector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Rotor.h">
+    <ClInclude Include="src\Enigma\Rotor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Wires.h">
+    <ClInclude Include="src\Enigma\Wires.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
