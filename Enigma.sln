@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Dependencies", "_Dependencies", "{52D0205A-D03D-4D79-8063-F88DDE0576D2}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Enigma", "Enigma.vcxproj", "{7735BC6B-8D2E-4FB0-9349-F27946A8881B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{52D0205A-D03D-4D79-8063-F88DDE0576D2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AES", "libs\AES\AES.vcxproj", "{8A3B3FC7-393F-4EF8-A3F9-A8B8AF5B2413}"
 EndProject

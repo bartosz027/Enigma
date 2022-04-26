@@ -2,8 +2,8 @@
 #define MAX_ROTOR_COUNT 16
 
 #include "Enigma/Plugboard.h"
-#include "Enigma/Rotor.h"
 #include "Enigma/Reflector.h"
+#include "Enigma/Rotor.h"
 
 #include <vector>
 #include <memory>
@@ -17,10 +17,8 @@ namespace Encryption {
 		} Available;		// Components available - can be used for decryption
 
 		struct ConfigurationComponents {
-			std::unique_ptr<Plugboard> Plugboard;
-			std::unique_ptr<Reflector> Reflector;
-
 			std::vector<Rotor> Rotors;
+			std::unique_ptr<Reflector> Reflector;
 		} Configuration;	// Components with configuration - currently used for decryption
 	};
 
@@ -32,7 +30,7 @@ namespace Encryption {
 	class Enigma {
 	public:
 		Enigma();
-		void Init(const std::string& rotorDir, const std::string& reflectorDir);
+		void Init(const std::string& rotor_dir, const std::string& reflector_dir);
 
 		void LoadSettings(const std::string& filepath, const std::string& password);
 		void SaveSettings(const std::string& filepath, const std::string& password) const;
@@ -40,7 +38,7 @@ namespace Encryption {
 		void AddPlugboardConnection(const std::string& plugs);
 		void RemovePlugboardConnection(const std::string& plugs);
 		
-		void SetRotorCount(int count); // Adds or removes rotors up to the given number
+		void SetRotorCount(int count);
 		void SetReflector(const std::string& name);
 
 		void SetRotorName(int index, const std::string& name);
@@ -61,14 +59,15 @@ namespace Encryption {
 
 		void EncryptMessageAfterConfigurationChanges();
 	private:
+		// Decryption components
+		std::unique_ptr<Plugboard> m_Plugboard;
+		Components m_Components;
+
 		// Rotor cache
 		std::vector<std::string> m_RotorConfigurationCache;
 		int m_RotorConfigurationCacheLastIndex;
 
-		// Decryption components
-		Components m_Components;
-
-		// Encrypted and Decrypted message
+		// Encrypted and decrypted message
 		Message m_Message;
 	};
 

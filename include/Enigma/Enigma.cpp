@@ -1,12 +1,11 @@
 #include "Enigma.h"
+#include "AES/AES.h"
 
 #include <fstream>
 #include <sstream>
 
 #include <filesystem>
 #include <regex>
-
-#include "AES/AES.h"
 
 namespace Encryption {
 
@@ -16,11 +15,11 @@ namespace Encryption {
 	}
 
 
-	void Enigma::Init(const std::string& rotorDir, const std::string& reflectorDir) {
-		m_Components.Configuration.Plugboard = std::make_unique<Plugboard>();
+	void Enigma::Init(const std::string& rotor_dir, const std::string& reflector_dir) {
+		m_Plugboard = std::make_unique<Plugboard>();
 
-		InitRotors(rotorDir);
-		InitReflectors(reflectorDir);
+		InitRotors(rotor_dir);
+		InitReflectors(reflector_dir);
 	}
 
 	void Enigma::InitRotors(const std::string& dir) {
@@ -129,8 +128,8 @@ namespace Encryption {
 		if (filename == "") {
 			throw "Invalid filename!";
 		}
-		else if (extension != ".stg") {
-			throw "Invalid extension!";
+		else if (extension != ".eni") {
+			throw "Invalid file extension!";
 		}
 
 		// Load settings from file
@@ -153,7 +152,7 @@ namespace Encryption {
 		ss2 << decrypted_data;
 
 		// Reset current plugboard settings
-		m_Components.Configuration.Plugboard->Reset();
+		m_Plugboard->Reset();
 
 		// Load plugboard settings
 		std::string plugboard;
@@ -217,12 +216,12 @@ namespace Encryption {
 		if (filename == "") {
 			throw "Invalid filename!";
 		}
-		else if (extension != ".stg") {
-			throw "Invalid extension!";
+		else if (extension != ".eni") {
+			throw "Invalid file extension!";
 		}
 
 		// Get plugboard settings
-		std::string plugs = m_Components.Configuration.Plugboard->GetConnectedPlugs();
+		std::string plugs = m_Plugboard->GetConnectedPlugs();
 
 		// Save plugboard settings
 		settings += (plugs != "") ? plugs : "NULL";
@@ -257,19 +256,19 @@ namespace Encryption {
 
 
 	void Enigma::AddPlugboardConnection(const std::string& plugs) {
-		m_Components.Configuration.Plugboard->Connect(plugs);
+		m_Plugboard->Connect(plugs);
 		EncryptMessageAfterConfigurationChanges();
 	}
 
 	void Enigma::RemovePlugboardConnection(const std::string& plugs) {
-		m_Components.Configuration.Plugboard->Disconnect(plugs);
+		m_Plugboard->Disconnect(plugs);
 		EncryptMessageAfterConfigurationChanges();
 	}
 
 
 	void Enigma::SetRotorCount(int count) {
 		if (count < 1 || count > MAX_ROTOR_COUNT) {
-			throw "Invalid parameter!";
+			throw "Invalid \"count\" parameter!";
 		}
 
 		int curr_count = static_cast<int>(m_Components.Configuration.Rotors.size());
@@ -302,7 +301,7 @@ namespace Encryption {
 			EncryptMessageAfterConfigurationChanges();
 		}
 		else {
-			throw "Invalid parameter!";
+			throw "Invalid \"name\" parameter!";
 		}
 	}
 
@@ -387,7 +386,7 @@ namespace Encryption {
 			m_RotorConfigurationCacheLastIndex = index;
 		}
 
-		// Remove not valid letters
+		// Remove invalid letters
 		m_Message.Input = m_Message.Input.substr(0, index);
 		m_Message.Output = m_Message.Output.substr(0, index);
 
@@ -435,7 +434,7 @@ namespace Encryption {
 			}
 
 			// Send signal to plugboard
-			m_Components.Configuration.Plugboard->ProcessSignal(letter);
+			m_Plugboard->ProcessSignal(letter);
 
 			// Send signal to rotors
 			for (int i = size - 1; i >= 0; i--) {
@@ -451,7 +450,7 @@ namespace Encryption {
 			}
 
 			// Send back signal to plugboard
-			m_Components.Configuration.Plugboard->ProcessSignal(letter);
+			m_Plugboard->ProcessSignal(letter);
 
 			// Add decrypted letter
 			m_Message.Output.push_back(letter);
