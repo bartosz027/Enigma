@@ -47,7 +47,9 @@ namespace Encryption {
 
 		void EncryptMessage(const std::string& message);
 
+		inline std::string GetConnectedPlugs() const { return m_Plugboard->GetConnectedPlugs(); }
 		inline const std::string& GetRotorKeySettings() const { return m_RotorConfigurationCache[0]; }
+
 		inline const Components& GetComponents() const { return m_Components; }
 		inline const Message& GetMessage() const { return m_Message; }
 	private:
